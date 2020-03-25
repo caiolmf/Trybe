@@ -1,6 +1,8 @@
 body {
     font-family: Product Sans, sans-serif;
     margin: 0;
+    background-color: #444;
+    color: white;
 }
 
 li {
@@ -40,7 +42,8 @@ th {
     padding-bottom: 12px;
     padding-left: 25px;
     text-align: left;
-    background-color: #f3f3f3;
+    background-color: #525252;
+    color: #e8e7e7;
 
     border-radius: 15px;
 }
