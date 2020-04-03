@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Exercício 4.5</title>
+    <style>
+      div {
+        border-color: black;
+        border-style: solid;
+      }
+      .title {
+        text-align: center;
+      }
+
+      .main-content {
+        background-color: yellow;
+      }
+
+      .main-content .center-content {
+        background-color: red;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .main-content .center-content p {
+        font-style: italic;
+      }
+
+      .main-content .left-content {
+        background-color: green;
+        width: 60%;
+        margin-left: 0;
+        margin-right: auto;
+      }
+
+      .main-content .left-content .small-image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 100%;
+      }
+
+      .main-content .right-content {
+        background-color: blue;
+        width: 60%;
+        margin-left: auto;
+        margin-right: 0;
+      }
+
+      .main-content .description {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      function addClass(elements, elementClass) {
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].className = elementClass;
+        }
+       
+      }
+
+      let pageTittle = document.createElement("H1");
+      pageTittle.innerHTML = "Exercício 4.5 - JavaScript DOM";
+      document.body.appendChild(pageTittle);
+
+      let mainContent = document.createElement("div");
+      mainContent.className = "main-content";
+      document.body.appendChild(mainContent);
+
+      let centerContent = document.createElement("div");
+      centerContent.className = "center-content";
+      mainContent.appendChild(centerContent);
+
+      let paragraph = document.createElement("p");
+      paragraph.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia rhoncus sem vitae interdum. Donec commodo, tortor pellentesque vulputate placerat, mauris sapien congue justo, et dictum urna lectus tincidunt metus. Curabitur at mattis risus. Sed ut elementum turpis. Curabitur turpis leo, interdum sed elementum maximus, convallis non lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in diam sit amet tortor faucibus lobortis. Ut egestas, tortor sed euismod iaculis, urna neque efficitur leo, eu semper justo velit sed tellus."
+      centerContent.appendChild(paragraph);
+
+      let leftContent = document.createElement("div");
+      leftContent.className = "left-content";
+      mainContent.appendChild(leftContent);
+
+      let rightContent = document.createElement("div");
+      rightContent.className = "right-content";
+      mainContent.appendChild(rightContent);
+
+      let picture = document.createElement("img");
+      picture.src = "https://picsum.photos/200";
+      picture.className = "small-image";
+      leftContent.appendChild(picture);
+
+      let numbers = ["um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez"];
+      let listUL = document.createElement("ul");
+      numbers.forEach(number => {
+        console.log(number);
+        let listLI = document.createElement("li");
+        listLI.innerHTML = number;
+        listUL.appendChild(listLI);
+      });
+      rightContent.appendChild(listUL);
+
+      for (let i = 0; i < 3; i++) {
+        let h3 = document.createElement("h3");
+        h3.innerHTML = "Header Tag #" + i;
+        mainContent.appendChild(h3);
+        
+      }
+
+      addClass(pageTittle, "title");
+      addClass(
+        document.querySelectorAll("h3"),
+        "description"
+      );
+
+    </script>
+  </body>
+</html>
