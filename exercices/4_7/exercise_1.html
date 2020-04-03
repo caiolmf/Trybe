@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trybe Journal</title>
+
+  <style>
+    #page-controls {
+      position: fixed;
+      bottom: 10px;
+      left: 10;
+    }
+    .page-control {
+      float: left;
+      border: 1px solid black;
+      border-radius: 8px;
+      margin: 0 10px 5px 0;
+      padding: 5px;
+      background-color: whitesmoke;
+    }
+  </style>
+</head>
+
+<body>
+  <section id="page-content">
+    <article>
+      <header>
+        <h1>Trybe News</h1>
+      </header>
+      <section>
+        <h2>O que há de novo</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi convallis erat in lorem venenatis suscipit.
+          Suspendisse a nulla id tortor commodo sollicitudin at ut lectus. Quisque scelerisque lorem ac ante sagittis
+          rhoncus. Vivamus elit nunc, malesuada quis consequat vitae, fermentum ac dui. Praesent dolor ligula,
+          pellentesque nec quam in, egestas sollicitudin diam. Praesent vestibulum pellentesque iaculis. Fusce quis nunc
+          id ipsum scelerisque lobortis vel eget sapien. Aenean et porttitor felis, sit amet consectetur elit. Curabitur
+          aliquam ullamcorper ligula, quis cursus nisi scelerisque ac. Donec viverra facilisis massa eget fringilla.
+          Mauris eleifend tempor porttitor. Nunc malesuada arcu id orci luctus, nec bibendum mi lacinia. Etiam congue ex
+          non mauris rhoncus aliquet.
+        </p>
+        <p>
+          Phasellus eu cursus massa. Nunc nunc dolor, sodales at facilisis sed, scelerisque vitae nunc. Class aptent
+          taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla lobortis tristique massa,
+          et malesuada quam luctus et. Integer et pretium neque. Proin consequat, urna non fringilla lobortis, enim
+          magna
+          malesuada lacus, et ultrices purus nulla vel diam. Ut aliquam consequat magna, non euismod nunc sagittis
+          vitae.
+          Proin eleifend ligula eros. Morbi arcu tortor, cursus id neque vitae, fringilla semper mi. Morbi et efficitur
+          lacus. Ut pellentesque urna sit amet justo egestas pharetra.
+        </p>
+        <p>
+          Proin condimentum convallis felis sit amet feugiat. Aenean tempor id dolor vel bibendum. Quisque rutrum nisi
+          sit
+          amet ultrices sodales. Integer ac massa ut tellus scelerisque convallis nec et elit. Vivamus pulvinar neque at
+          malesuada mollis. Morbi at libero fermentum arcu tristique ultricies non quis libero. Duis sit amet magna at
+          urna vulputate facilisis in id erat. Donec non consequat ligula. Pellentesque habitant morbi tristique
+          senectus
+          et netus et malesuada fames ac turpis egestas. Nunc sit amet dolor egestas, hendrerit diam eget, vulputate
+          nulla. Maecenas sapien dui, tempus a hendrerit eget, maximus in massa. Pellentesque in tortor vel sem
+          efficitur
+          accumsan sit amet ac ex. Maecenas pellentesque felis ac vulputate rhoncus.
+        </p>
+      </section>
+    </article>
+  </section>
+  <section id="page-controls">
+    <h1>Page Controls</h1>
+    <div class="page-control">
+      <h3>Page Color</h3>
+      Set hex code for page color #
+      <input type="text" name="page-color" id="page-color">
+      <button id="set-page-color">Save</button>
+    </div>
+    <div class="page-control">
+      <h3>Text Color</h3>
+      <button class="text-color-btn">Black</button>
+      <button class="text-color-btn">White</button>
+    </div>
+    <div class="page-control">
+      <h3>Font Size</h3>
+      Set page font size in pixels
+      <input type="text" name="page-font-size" id="page-font-size">
+      <button id="set-font-size">Save</button>
+    </div>
+    <div class="page-control">
+      <h3>Line Spacing</h3>
+      Set line spacing in pixels
+      <input type="text" name="page-line-spacing" id="page-line-spacing">
+      <button id="set-line-spacing">Save</button>
+    </div>
+    <div class="page-control">
+      <h3>font Family</h3>
+      Set font family
+      <input type="text" name="page-font-family" id="page-font-family">
+      <button id="set-font-family">Save</button>
+    </div>
+  </section>
+
+  <script>
+    window.onload = function () {
+      // Check user settings
+      if (localStorage.length > 0) {
+        for (const key in localStorage) {
+          if (localStorage.hasOwnProperty(key)) {
+            const value = localStorage[key];
+            switch (key) {
+              case "bgColor":
+                document.querySelector("body").style.backgroundColor = value;
+                break;
+              case "fontColor":
+                document.querySelector("#page-content").style.color = value;
+                break;
+              case "fontSize":
+                document.querySelector("#page-content").style.fontSize = value;
+                break;
+              case "lineSpacing":
+                let paragraphs = document.querySelectorAll("p");
+                paragraphs.forEach(paragraph => {
+                  paragraph.style.lineHeight = value;
+                });
+                break;  
+              default:
+                break;
+            }          
+          }
+        }
+      }
+      
+      // Control the page background color
+      let pageColorBtn = document.querySelector("#set-page-color");
+      pageColorBtn.addEventListener('click', function (e) {
+        let newColorHEX = document.querySelector("#page-color").value;
+        document.body.style.backgroundColor = `#${newColorHEX}`;
+
+        // Web Storage Section
+        localStorage.setItem("bgColor", `#${newColorHEX}`);
+
+      });
+
+      //Control the page text color
+      let textColorBtns = document.querySelectorAll(".text-color-btn");
+      textColorBtns.forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          let newTextColor = btn.innerHTML;
+          document.querySelector("#page-content").style.color = newTextColor;
+
+          // Web Storage Section
+          localStorage.setItem("fontColor", newTextColor);
+        });
+
+      });
+
+      // Control the page font size
+      let fontSizeBtn = document.querySelector("#set-font-size");
+      fontSizeBtn.addEventListener('click', function (e) {
+        let newFontSize = document.querySelector("#page-font-size").value;
+        document.querySelector("#page-content").style.fontSize = `${newFontSize}px`;
+
+        // Web Storage Section
+        localStorage.setItem("fontSize", newFontSize);
+      });
+
+      // Control line spacing
+      let lineSpacingBtn = document.querySelector("#set-line-spacing");
+      lineSpacingBtn.addEventListener('click', function (e) {
+        let newLineSpacing = document.querySelector("#page-line-spacing").value;
+        let textParagraphs = document.querySelectorAll("p");
+        textParagraphs.forEach(paragraph => {
+          textParagraphs.style.lineHeight = newLineSpacing;
+        });
+
+        // Web Storage Section
+        localStorage.setItem("lineSpacing", newLineSpacing);
+      });
+
+      //Control font facing 
+      let fontFacingBtn = document.querySelector("#set-font-family");
+      fontFacingBtn.addEventListener('click', function (e) {
+        let newFontFamily = document.querySelector("#page-font-family").value;
+        let textParagraphs = document.querySelectorAll("p");
+        textParagraphs.forEach(paragraph => {
+          textParagraphs.style.fontFamily = newFontFamily;
+        });
+
+        // Web Storage Section
+        localStorage.setItem("fontFamily", newFontFamily);
+      });
+
+    };
+  </script>
+</body>
+
+</html>
